@@ -1672,7 +1672,7 @@ implements TemplateVariable {
             'format' => $vars['body']->getType(),
             'staff_id' => $vars['staffId'],
             'user_id' => $vars['userId'],
-            'poster' => $poster,
+            'poster' => Format::sanitize($poster),
             'source' => $vars['source'],
             'flags' => $vars['flags'] ?: 0,
         ));
