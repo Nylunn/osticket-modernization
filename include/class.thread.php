@@ -1757,6 +1757,10 @@ implements TemplateVariable {
                         $files[$i]['inline'] = true;
                 }
                 foreach ($entry->normalizeFileInfo($files) as $F) {
+                    if (!empty($F['inline'])
+                            && (!isset($F['file']) || !$F['file']->isInlineSafeImage()))
+                        $F['inline'] = false;
+
                     // Deduplicate on the `key` attribute. The key is
                     // necessary for the CID rewrite below
                     $attached_files[$F['key']] = $F;
@@ -1769,6 +1773,9 @@ implements TemplateVariable {
         // discarded, only the unique hash-code (key) will be available to
         // retrieve the image later
         foreach ($attached_files as $key => $a) {
+            if (empty($a['inline']))
+                continue;
+
             if (isset($a['cid']) && $a['cid']) {
                 $body = preg_replace('/src=("|\'|\b)(?:cid:)?'
                     . preg_quote($a['cid'], '/').'\1/i',

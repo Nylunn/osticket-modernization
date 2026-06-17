@@ -58,7 +58,7 @@ if ($cfg->isAuthRequiredForFiles()
 // and the user has access to the parent ticket!!
 if ($file->verifySignature($_GET['signature'], $_GET['expires'])) {
     try {
-        if (($s = @$_GET['s']) && strpos($file->getType(), 'image/') === 0)
+        if (($s = @$_GET['s']) && $file->isInlineSafeImage())
             return $file->display($s);
 
         // Download the file..

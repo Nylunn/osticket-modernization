@@ -604,6 +604,9 @@ class Format {
             if (!($file = AttachmentFile::lookup($match[2])))
                 return $match[0];
 
+            if (!$file->isInlineSafeImage())
+                return $match[0];
+
             return sprintf('"%s" data-cid="%s"',
                 $file->getDownloadUrl($options), $match[2]);
         }, $html);
