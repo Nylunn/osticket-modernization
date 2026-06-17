@@ -777,6 +777,8 @@ class TicketsAjaxAPI extends AjaxController {
 
         if (!($ticket=Ticket::lookup($tid)))
             Http::response(404, __('No such ticket'));
+        elseif (!$ticket->checkStaffPerm($thisstaff))
+            Http::response(403, __('Permission denied'));
         elseif (!($field=$ticket->getField($fid)))
             Http::response(404, __('No such field'));
 
