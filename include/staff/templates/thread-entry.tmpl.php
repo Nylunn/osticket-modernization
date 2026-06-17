@@ -82,7 +82,7 @@ if ($user && $cfg->isAvatarsEnabled())
             )
         ); ?>
         <span style="max-width:400px" class="faded title truncate"><?php
-            echo $entry->title; ?>
+            echo Format::htmlchars($entry->title); ?>
         </span>
     </div>
     <div class="thread-body no-pjax">
