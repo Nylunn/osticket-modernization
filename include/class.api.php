@@ -353,7 +353,7 @@ class ApiController extends Controller {
         // TODO: Only include API Key when in debug mode to avoid
         // potentialialy leaking a valid key in system logs
         if (($key=$this->getApiKey()))
-            $msg .= "\n[$key]\n";
+            $msg .= sprintf("\n[%s]\n", Format::shroud($key, 8, 16));
 
         $title = sprintf('%s (%s)', $title ?: __('API Error'), $code);
         $this->logError($title, $msg, $logOnly);
