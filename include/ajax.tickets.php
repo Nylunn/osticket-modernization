@@ -1704,10 +1704,17 @@ class TicketsAjaxAPI extends AjaxController {
     }
 
     function triggerThreadAction($ticket_id, $thread_id, $action) {
+        global $thisstaff;
+
+        if (!($ticket = Ticket::lookup($ticket_id))
+                || !$ticket->checkStaffPerm($thisstaff))
+            Http::response(404, 'No such ticket thread entry');
+
         $thread = ThreadEntry::lookup($thread_id);
         if (!$thread)
             Http::response(404, 'No such ticket thread entry');
-        if ($thread->getThread()->getObjectId() != $ticket_id)
+        if ($thread->getThread()->getObjectType() != 'T'
+                || $thread->getThread()->getObjectId() != $ticket_id)
             Http::response(404, 'No such ticket thread entry');
 
         $valid = false;
