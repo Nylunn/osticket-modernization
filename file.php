@@ -67,7 +67,8 @@ if ($file->verifySignature($_GET['signature'], $_GET['expires'])) {
         $file->download($filename, $disposition, @$_GET['expires']);
     }
     catch (Exception $ex) {
-        Http::response(500, 'Unable to find that file: '.$ex->getMessage());
+        $ost->logError(__('File download error'), $ex->getMessage());
+        Http::response(500, __('Unable to retrieve the requested file'));
     }
 }
 // else
