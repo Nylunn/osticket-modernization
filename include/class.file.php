@@ -277,7 +277,8 @@ class AttachmentFile extends VerySimpleModel
 
         $check = static::_genUrlSignature($this->getId(), $this->getKey(),
             $this->getSignature(), $expires);
-        return $signature == $check;
+
+        return hash_equals($check, $signature);
     }
 
     static function _genUrlSignature($id, $key, $signature, $expires) {
