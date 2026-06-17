@@ -1,3 +1,8 @@
+osTicket v1.18.4
+================
+### Security
+* security: Latest Patches 06/2026 (52c366f, 5afdf54, c54a6ac, 1e39bf1, feccb6a, 6eb6b98, 078516e, 98abb05, e52e010, fd96bba, 7bbd8ab, ba6217a, 580e1c8, b535782, 5963797, d590a97, eaebe01, b4cc092, d457c14, 5600f94, 5ff9795, 119cefe, b4ede88, 2a0c388, 6558b33)
+
 osTicket v1.18.3
 ================
 ### Enhancements
