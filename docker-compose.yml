@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Service 1 : La base de données
+  db:
+    image: mysql:8.0
+    container_name: osticket-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "rootpassword"
+      MYSQL_DATABASE: "osticket"
+      MYSQL_USER: "osticket_user"
+      MYSQL_PASSWORD: "osticket_password"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # <-- ICI : On donne le fichier SQL à MySQL
+    networks:
+      - osticket-network
+
+  # Service 2 : L'application osTicket (On va la build nous-mêmes)
+  web:
+    build: .
+    container_name: osticket-web
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./include:/var/www/html/include # Pour garder l'accès au code si besoin
+    depends_on:
+      - db
+    networks:
+      - osticket-network
+
+volumes:
+  db_data:
+
+networks:
+  osticket-network:
