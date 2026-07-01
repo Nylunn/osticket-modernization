@@ -26,5 +26,5 @@ Pour lancer l'application sur votre machine locale, suivez ces étapes simples :
 
 ### 1. Cloner le dépôt
 ```bash
-git clone [https://github.com/TON_USERNAME/osticket-modernization.git](https://github.com/TON_USERNAME/osticket-modernization.git)
+git clone [https://github.com/Nylunn/osticket-modernization.git](https://github.com/Nylunn/osticket-modernization.git)
 cd osticket-modernization
